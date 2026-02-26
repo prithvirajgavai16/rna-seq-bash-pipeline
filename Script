@@ -1,0 +1,43 @@
+read -p "Enter full path to your FASTQ file: " fastq_file
+if [ ! -f "$fastq_file" ]; then
+    echo "FASTQ file does not exist."
+    exit 1
+fi
+
+echo "FASTQ file confirmed."
+
+# -------------------------------
+# FASTQC SECTION
+# -------------------------------
+read -p "Run FastQC? (y/n): " run_fastqc
+if [[ "$run_fastqc" =~ ^[Yy]$ ]]; then
+    read -p "Enter full FastQC command: " fastqc_command
+    echo "Running FastQC..."
+    eval "$fastqc_command"
+fi
+
+# -------------------------------
+# TRIMMOMATIC SECTION
+# -------------------------------
+read -p "Run Trimmomatic? (y/n): " run_trim
+if [[ "$run_trim" =~ ^[Yy]$ ]]; then
+    echo "Example:"
+    echo "java -jar /usr/share/java/trimmomatic-0.39.jar SE -threads 8 input.fastq output.fastq LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36"
+    read -p "Enter full Trimmomatic command: " trim_command
+    echo "Running Trimmomatic..."
+    eval "$trim_command"
+fi
+
+# -------------------------------
+# HISAT2 SECTION
+# -------------------------------
+read -p "Run HISAT2 alignment? (y/n): " run_hisat
+if [[ "$run_hisat" =~ ^[Yy]$ ]]; then
+    echo "Example:"
+    echo "hisat2 -q --rna-strandness R -x /path/to/index -U input.fastq | samtools sort -o output.bam"
+    read -p "Enter full HISAT2 command: " hisat_command
+    echo "Running HISAT2..."
+    eval "$hisat_command"
+fi
+
+echo "Pipeline completed in $SECONDS seconds."
