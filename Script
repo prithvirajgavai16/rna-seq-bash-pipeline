@@ -1,3 +1,27 @@
+#!/bin/bash
+# ===============================
+#   RNA-seq Alignment Pipeline
+# ===============================
+# Author  : Prithviraj Gavai
+# GitHub  : https://github.com/prithvirajgavai16/rna-seq-bash-pipeline
+# Version : 1.0
+# Year    : 2026
+# License : MIT
+# ===============================
+# Description:
+#   Interactive RNA-seq analysis pipeline for quality control,
+#   read trimming, and genome alignment.
+#   Supports Single-End and Paired-End sequencing data.
+#
+# Dependencies:
+#   - FastQC
+#   - Trimmomatic
+#   - HISAT2
+#   - samtools
+#   - Java (>= 8)
+#   - Bash 5+ (Linux/Ubuntu)
+# ===============================
+
 set -e  # Stop pipeline if any step fails
 echo "==============================="
 echo "   RNA-seq Alignment Pipeline  "
