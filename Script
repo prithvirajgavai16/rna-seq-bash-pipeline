@@ -1,3 +1,8 @@
+set -e  # Stop pipeline if any step fails
+echo "==============================="
+echo "   RNA-seq Alignment Pipeline  "
+echo "==============================="
+start_time=$SECONDS
 read -p "Enter full path to your FASTQ file: " fastq_file
 if [ ! -f "$fastq_file" ]; then
     echo "FASTQ file does not exist."
@@ -40,4 +45,4 @@ if [[ "$run_hisat" =~ ^[Yy]$ ]]; then
     eval "$hisat_command"
 fi
 
-echo "Pipeline completed in $SECONDS seconds."
+echo "Pipeline completed in $(( SECONDS - start_time )) seconds."
